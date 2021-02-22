@@ -151,7 +151,7 @@ GonkDisplayP::GonkDisplayP()
   mHwc = std::make_unique<HWC2::Device>(
       std::make_unique<Hwc2::impl::Composer>(serviceName));
   assert(mHwc);
-  mHwc->registerCallback(1);
+  mHwc->registerCallback(new HWComposerCallback(mHwc.get()), 0);
 
   std::unique_lock<std::mutex> lock(hotplugMutex);
   HWC2::Display* hwcDisplay;
